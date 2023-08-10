@@ -1,0 +1,16 @@
+require('nvim-treesitter.configs').setup {
+	ensure_installed = { "lua", "rust", "toml", "cpp", "c" },
+	auto_install = true,
+	highlight = {
+		enable = true,
+	},
+	indent = { enable = true },
+	rainbow = {
+		enable = true,
+		extended_mode = true,
+		max_file_lines = nil,
+	}
+}
+
+-- vim.wo.foldmethod = 'expr'
+-- vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
