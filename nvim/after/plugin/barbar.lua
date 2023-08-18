@@ -1,4 +1,3 @@
-
 require('bufferline').setup {
     animation = true,
     auto_hide = true, -- Hide when only a single buffer is open
@@ -10,22 +9,24 @@ require('bufferline').setup {
             custom_colors = false,
             enabled = true,
         },
-        separator = {left = '▎', right = ''},
+        separator = { left = '▎', right = '' },
 
-        modified = {button = '●'},
-        pinned = {button = '車'},
+        modified = { button = '●' },
+        pinned = { button = '車' },
 
-        alternate = {filetype = {enabled = false}},
-        current = {buffer_index = true},
-        inactive = {button = '×'},
-        visible = {modified = {buffer_number = false}},
+        buffer_index = true,
+
+        alternate = { filetype = { enabled = false } },
+        -- current = {buffer_index = true},
+        inactive = { button = '×' },
+        -- visible = {modified = {buffer_number = false}},
     },
 
-  -- icon_separator_active = '▎',
-  -- icon_separator_inactive = '▎',
-  -- icon_close_tab = '',
-  -- icon_close_tab_modified = '●',
-  -- icon_pinned = '車',
+    -- icon_separator_active = '▎',
+    -- icon_separator_inactive = '▎',
+    -- icon_close_tab = '',
+    -- icon_close_tab_modified = '●',
+    -- icon_pinned = '車',
 }
 
 local map = vim.api.nvim_set_keymap
@@ -63,7 +64,7 @@ map('n', '<A-c>', '<Cmd>BufferClose<CR>', opts)
 -- Magic buffer-picking mode
 map('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
 -- Sort automatically by...
-map('n', '<Space>bb', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
-map('n', '<Space>bd', '<Cmd>BufferOrderByDirectory<CR>', opts)
-map('n', '<Space>bl', '<Cmd>BufferOrderByLanguage<CR>', opts)
-map('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
+map('n', '<Leader>bb', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
+map('n', '<Leader>bd', '<Cmd>BufferOrderByDirectory<CR>', opts)
+map('n', '<Leader>bl', '<Cmd>BufferOrderByLanguage<CR>', opts)
+map('n', '<Leader>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)

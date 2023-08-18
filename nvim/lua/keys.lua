@@ -1,22 +1,24 @@
-
+-- Set Leader
+vim.keymap.set('', '<Space>', '<Nop>')
+vim.g.mapleader = " "
 
 -- Hop
 local hop = require('hop')
 local directions = require('hop.hint').HintDirection
 vim.keymap.set('', '<C-h>', function()
     hop.hint_patterns()
-end, {remap=true})
+end, { remap = true })
 
 -- File Explorer
 local nvim_tree = require('nvim-tree.api');
-vim.keymap.set('', '<C-f>', nvim_tree.tree.toggle, {remap=true})
+vim.keymap.set('', '<C-f>', nvim_tree.tree.toggle, { remap = true })
 
 -- Tagbar
 vim.keymap.set('', '<C-t>', ':TagbarToggle<CR>', {})
 
 -- Comments
-vim.keymap.set('', '<A-c>', 'gcc', {remap=true})
-vim.keymap.set('v', '<A-c>', 'gc', {remap=true})
+vim.keymap.set('', '<A-c>', 'gcc', { remap = true })
+vim.keymap.set('v', '<A-c>', 'gc', { remap = true })
 
 -- Move between windows
 vim.keymap.set('', '<A-h>', '<C-w>h', {})
@@ -28,4 +30,5 @@ vim.keymap.set('', '<A-k>', '<C-w>k', {})
 vim.keymap.set('', '<A-Up>', 'ddkkp', {})
 vim.keymap.set('', '<A-Down>', 'ddp', {})
 
-
+-- Completion shortcut
+vim.keymap.set('i', '<C-i>', '<C-x><C-o>', {})

@@ -6,7 +6,11 @@ return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'
 
     use 'voldikss/vim-floaterm'         -- Floaterm
-    use 'tanvirtin/monokai.nvim'        -- Theme
+    -- Themes
+    -- use 'tanvirtin/monokai.nvim'
+    use "ellisonleao/gruvbox.nvim"
+    use "savq/melange-nvim"
+
     use  'tpope/vim-surround'
 
     -- Comment

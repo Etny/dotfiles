@@ -7,6 +7,7 @@ vim.api.nvim_set_option('updatetime', 300)
 -- [[ Context ]]
 -- opt.colorcolumn = '80'
 opt.number = true
+opt.relativenumber = true
 opt.signcolumn = "yes"
 
 -- [[ Filetypes ]]
@@ -24,8 +25,8 @@ opt.undodir="~/.vimdid"
 opt.undofile = true
 
 -- [[ Theme ]]
-opt.syntax = "ON"
-opt.termguicolors = true
+-- opt.syntax = "ON"
+-- opt.termguicolors = true
 
 -- [[ Search ]]
 opt.ignorecase = true
