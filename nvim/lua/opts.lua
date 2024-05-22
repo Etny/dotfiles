@@ -4,6 +4,13 @@ opt.completeopt = {'menuone', 'noselect', 'noinsert'}
 opt.shortmess = opt.shortmess + { c = true }
 vim.api.nvim_set_option('updatetime', 300)
 
+-- filetypes
+vim.filetype.add({
+    extension = {
+        frag = 'glsl'
+    }
+})
+
 -- [[ Context ]]
 -- opt.colorcolumn = '80'
 opt.number = true

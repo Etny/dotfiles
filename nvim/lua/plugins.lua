@@ -1,17 +1,32 @@
-
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
+    use 'wbthomason/packer.nvim'
 
-	use 'wbthomason/packer.nvim'
-
-    use 'voldikss/vim-floaterm'         -- Floaterm
+    use 'voldikss/vim-floaterm' -- Floaterm
     -- Themes
     -- use 'tanvirtin/monokai.nvim'
     use "ellisonleao/gruvbox.nvim"
     use "savq/melange-nvim"
+    use "Biscuit-Colorscheme/nvim"
+    use "AlexvZyl/nordic.nvim"
+    use "olimorris/onedarkpro.nvim"
+    use "rebelot/kanagawa.nvim"
+    use "luisiacc/gruvbox-baby"
 
-    use  'tpope/vim-surround'
+    -- surrounding brackets
+    use 'tpope/vim-surround'
+
+    -- autosave
+    use({
+	"Pocco81/auto-save.nvim",
+	config = function()
+		 require("auto-save").setup {
+			-- your config goes here
+			-- or just leave it empty :)
+		 }
+	end,
+    })
 
     -- Comment
     use {
@@ -30,24 +45,27 @@ return require('packer').startup(function(use)
 
     -- HlArgs
     use {
-      'm-demare/hlargs.nvim',
-      requires = { 'nvim-treesitter/nvim-treesitter' }
+        'm-demare/hlargs.nvim',
+        requires = { 'nvim-treesitter/nvim-treesitter' }
     }
 
     -- Autopairs
     use {
-	    "windwp/nvim-autopairs",
+        "windwp/nvim-autopairs",
         config = function() require("nvim-autopairs").setup {} end
     }
 
+    -- HTML Tags
+    use 'windwp/nvim-ts-autotag';
+
     -- Search
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.0',
-        requires = { {'nvim-lua/plenary.nvim'} }
+        'nvim-telescope/telescope.nvim', tag = '0.1.4',
+        requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
-    use 'lewis6991/impatient.nvim'      -- Impatient
-    use 'danilamihailov/beacon.nvim'    -- Beacon
+    use 'lewis6991/impatient.nvim'   -- Impatient
+    use 'danilamihailov/beacon.nvim' -- Beacon
 
     -- Hop
     use {
@@ -55,7 +73,7 @@ return require('packer').startup(function(use)
         branch = 'v2', -- optional but strongly recommended
         config = function()
             -- you can configure Hop the way you like here; see :h hop-config
-            require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+            require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
         end
     }
 
@@ -71,39 +89,41 @@ return require('packer').startup(function(use)
     }
 
     -- Tabs
-    use {'romgrk/barbar.nvim', requires = 'nvim-web-devicons'}
+    use { 'romgrk/barbar.nvim', requires = 'nvim-web-devicons' }
 
     -- Tagbar
     use 'preservim/tagbar'
 
-	-- Mason
-	use 'williamboman/mason.nvim'
-	use 'williamboman/mason-lspconfig.nvim'
+    -- Mason
+    use 'williamboman/mason.nvim'
+    use 'williamboman/mason-lspconfig.nvim'
 
     -- LSP
-	use 'neovim/nvim-lspconfig'
-    use 'hrsh7th/cmp-nvim-lsp'
-	use 'nvim-treesitter/nvim-treesitter'
+    use 'neovim/nvim-lspconfig'
+    use {
+        'hrsh7th/nvim-cmp',
+        requires = {
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "saadparwaiz1/cmp_luasnip",
+            "hrsh7th/cmp-nvim-lua",
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-cmdline",
+        }
+    }
+    use 'nvim-treesitter/nvim-treesitter'
+
+    -- GLSL
+    use { 'timtro/glslView-nvim' }
 
     -- C
     use 'gauteh/vim-cppman'
 
-	-- Rust
-	use 'simrat39/rust-tools.nvim'
+    -- Rust
+    use 'simrat39/rust-tools.nvim'
     use 'rust-lang/rust.vim'
     use 'puremourning/vimspector'
 
-	-- Snippets
-	use 'L3MON4D3/LuaSnip'
-	use 'hrsh7th/cmp-buffer'
-	use 'hrsh7th/cmp-nvim-lsp-signature-help'
-	use 'hrsh7th/cmp-nvim-lua'
-	use 'hrsh7th/cmp-path'
-	use 'hrsh7th/cmp-vsnip'
-	use 'hrsh7th/nvim-cmp'
-	use 'hrsh7th/vim-vsnip'
-
+    -- Snippets
+    use 'L3MON4D3/LuaSnip'
 end)
-
-
-

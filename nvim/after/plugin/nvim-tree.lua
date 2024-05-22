@@ -5,8 +5,10 @@ tree.setup {
         open_file = {
             quit_on_open = true
         }
-    }
+    },
 }
+
+require('nvim-ts-autotag').setup();
 
 local function open_nvim_tree(data)
     if data.file == "" then

@@ -2,6 +2,15 @@ local lc = require('lspconfig')
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    "documentation",
+    "detail",
+    "additionalTextEdits",
+  },
+}
+
 lc.clangd.setup {
     capabilities = capabilities
 }
@@ -20,6 +29,10 @@ lc.rust_analyzer.setup {
                     enable = false,
                 },
             },
+            diagnostics = {
+                enable = true,
+                disabled = {"unresolved-proc-macro"}
+            }
         },
     },
     capabilities = capabilities,
@@ -27,6 +40,17 @@ lc.rust_analyzer.setup {
 lc.asm_lsp.setup {
     single_file_support = true,
     filetypes = { "asm", "s", "S" }
+}
+lc.cssls.setup {
+    capabilities = capabilities;
+}
+lc.glsl_analyzer.setup {
+    capabilities = capabilities,
+}
+
+require('glslView').setup {
+  viewer_path = 'glslViewer',
+  args = { '-l' },
 }
 
 local bindings = require('lspbindings')

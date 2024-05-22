@@ -31,12 +31,20 @@ require('gruvbox').setup({
   transparent_mode = false,
 })
 
+ -- Kanagawa
+require('kanagawa').setup({
+    background = {
+        dark = "dragon"
+    }
+})
+
+-- gruvbox-baby
+-- require('gruvbox-baby')
+vim.g.gruvbox_baby_keyword_style = "bold"
+-- vim.g.gruvbox_baby_transparent_mode = "true"
+-- vim.g.gruvbox_baby_variable_style = "italic"
+
+
 vim.o.background = "dark"
--- vim.opt.termguicolors = true
--- vim.cmd.colorscheme 'gruvbox'
-
--- melange
-
--- Theme
 vim.opt.termguicolors = true
-vim.cmd.colorscheme 'gruvbox'
+vim.cmd.colorscheme 'gruvbox-baby'

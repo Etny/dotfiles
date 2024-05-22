@@ -17,8 +17,8 @@ vim.keymap.set('', '<C-f>', nvim_tree.tree.toggle, { remap = true })
 vim.keymap.set('', '<C-t>', ':TagbarToggle<CR>', {})
 
 -- Comments
-vim.keymap.set('', '<A-c>', 'gcc', { remap = true })
-vim.keymap.set('v', '<A-c>', 'gc', { remap = true })
+vim.keymap.set('', '<C-c>', 'gcc', { remap = true })
+vim.keymap.set('v', '<C-c>', 'gc', { remap = true })
 
 -- Move between windows
 vim.keymap.set('', '<A-h>', '<C-w>h', {})
