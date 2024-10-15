@@ -12,7 +12,7 @@ return {
 
         vim.keymap.set({ "n", "i" }, "<C-a>", vim.lsp.buf.code_action, bufopts)
 
-        vim.keymap.set("n", "<Leader>h", 
+        vim.keymap.set("n", "<A-h>", 
             function ()
                 vim.lsp.buf.hover()
                 -- vim.lsp.buf.hover()

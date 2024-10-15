@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/ynte/.cache/nvim/packer_hererocks/2.1.1707061634/share/lua/5.1/?.lua;/home/ynte/.cache/nvim/packer_hererocks/2.1.1707061634/share/lua/5.1/?/init.lua;/home/ynte/.cache/nvim/packer_hererocks/2.1.1707061634/lib/luarocks/rocks-5.1/?.lua;/home/ynte/.cache/nvim/packer_hererocks/2.1.1707061634/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/ynte/.cache/nvim/packer_hererocks/2.1.1707061634/lib/lua/5.1/?.so"
+local package_path_str = "/home/ynte/.cache/nvim/packer_hererocks/2.1.1713773202/share/lua/5.1/?.lua;/home/ynte/.cache/nvim/packer_hererocks/2.1.1713773202/share/lua/5.1/?/init.lua;/home/ynte/.cache/nvim/packer_hererocks/2.1.1713773202/lib/luarocks/rocks-5.1/?.lua;/home/ynte/.cache/nvim/packer_hererocks/2.1.1713773202/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/ynte/.cache/nvim/packer_hererocks/2.1.1713773202/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -172,6 +172,11 @@ _G.packer_plugins = {
     path = "/home/ynte/.local/share/nvim/site/pack/packer/start/lightline.vim",
     url = "https://github.com/itchyny/lightline.vim"
   },
+  ["lsp_signature.nvim"] = {
+    loaded = true,
+    path = "/home/ynte/.local/share/nvim/site/pack/packer/start/lsp_signature.nvim",
+    url = "https://github.com/ray-x/lsp_signature.nvim"
+  },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
     path = "/home/ynte/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
@@ -258,6 +263,11 @@ _G.packer_plugins = {
     path = "/home/ynte/.local/share/nvim/site/pack/packer/start/rust.vim",
     url = "https://github.com/rust-lang/rust.vim"
   },
+  ["sxhkd-vim"] = {
+    loaded = true,
+    path = "/home/ynte/.local/share/nvim/site/pack/packer/start/sxhkd-vim",
+    url = "https://github.com/kovetskiy/sxhkd-vim"
+  },
   tagbar = {
     loaded = true,
     path = "/home/ynte/.local/share/nvim/site/pack/packer/start/tagbar",
@@ -288,6 +298,11 @@ _G.packer_plugins = {
     path = "/home/ynte/.local/share/nvim/site/pack/packer/start/vim-illuminate",
     url = "https://github.com/RRethy/vim-illuminate"
   },
+  ["vim-suda"] = {
+    loaded = true,
+    path = "/home/ynte/.local/share/nvim/site/pack/packer/start/vim-suda",
+    url = "https://github.com/lambdalisue/vim-suda"
+  },
   ["vim-surround"] = {
     loaded = true,
     path = "/home/ynte/.local/share/nvim/site/pack/packer/start/vim-surround",
@@ -301,6 +316,10 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: hop.nvim
+time([[Config for hop.nvim]], true)
+try_loadstring("\27LJ\2\nU\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\tkeys\28etovxqpdygfblzhckisuran\nsetup\bhop\frequire\0", "config", "hop.nvim")
+time([[Config for hop.nvim]], false)
 -- Config for: auto-save.nvim
 time([[Config for auto-save.nvim]], true)
 try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14auto-save\frequire\0", "config", "auto-save.nvim")
@@ -313,10 +332,6 @@ time([[Config for nvim-autopairs]], false)
 time([[Config for Comment.nvim]], true)
 try_loadstring("\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
 time([[Config for Comment.nvim]], false)
--- Config for: hop.nvim
-time([[Config for hop.nvim]], true)
-try_loadstring("\27LJ\2\nU\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\tkeys\28etovxqpdygfblzhckisuran\nsetup\bhop\frequire\0", "config", "hop.nvim")
-time([[Config for hop.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

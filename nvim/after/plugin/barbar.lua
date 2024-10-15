@@ -68,3 +68,14 @@ map('n', '<Leader>bb', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
 map('n', '<Leader>bd', '<Cmd>BufferOrderByDirectory<CR>', opts)
 map('n', '<Leader>bl', '<Cmd>BufferOrderByLanguage<CR>', opts)
 map('n', '<Leader>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
+
+-- Close empty buffer on startup
+vim.api.nvim_create_autocmd('VimEnter', {callback = function()
+  if vim.api.nvim_cmd({cmd = 'args'}, {output = true}) == '' then -- if opening neovim without args
+    vim.api.nvim_command 'bdelete' -- delete the empty buffer
+
+    -- HACK: the next buffer won't have a filetype for… some reason. just re-set it.
+    -- local ft = vim.filetype.match {buf = 0}
+    -- vim.api.nvim_buf_set_option(0, 'filetype', ft)
+  end
+end})

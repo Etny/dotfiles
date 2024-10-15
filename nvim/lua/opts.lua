@@ -7,7 +7,9 @@ vim.api.nvim_set_option('updatetime', 300)
 -- filetypes
 vim.filetype.add({
     extension = {
-        frag = 'glsl'
+        frag = 'glsl',
+        wgsl = 'wgsl',
+        sway = 'swayconfig'
     }
 })
 

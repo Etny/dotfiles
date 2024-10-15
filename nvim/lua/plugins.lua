@@ -60,9 +60,10 @@ return require('packer').startup(function(use)
 
     -- Search
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.4',
-        requires = { { 'nvim-lua/plenary.nvim' } }
+        'nvim-telescope/telescope.nvim', 
+        requires = { 'nvim-lua/plenary.nvim' }
     }
+
 
     use 'lewis6991/impatient.nvim'   -- Impatient
     use 'danilamihailov/beacon.nvim' -- Beacon
@@ -84,8 +85,7 @@ return require('packer').startup(function(use)
         'nvim-tree/nvim-tree.lua',
         requires = {
             'nvim-tree/nvim-web-devicons',
-        },
-        tag = 'nightly'
+        }
     }
 
     -- Tabs
@@ -93,6 +93,11 @@ return require('packer').startup(function(use)
 
     -- Tagbar
     use 'preservim/tagbar'
+
+    -- Sudo
+    use {
+        'lambdalisue/vim-suda',
+    }
 
     -- Mason
     use 'williamboman/mason.nvim'
@@ -112,6 +117,7 @@ return require('packer').startup(function(use)
         }
     }
     use 'nvim-treesitter/nvim-treesitter'
+    use "ray-x/lsp_signature.nvim"
 
     -- GLSL
     use { 'timtro/glslView-nvim' }
@@ -123,6 +129,9 @@ return require('packer').startup(function(use)
     use 'simrat39/rust-tools.nvim'
     use 'rust-lang/rust.vim'
     use 'puremourning/vimspector'
+
+    -- sxhkd
+    use 'kovetskiy/sxhkd-vim'
 
     -- Snippets
     use 'L3MON4D3/LuaSnip'

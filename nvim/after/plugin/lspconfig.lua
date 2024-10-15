@@ -47,11 +47,18 @@ lc.cssls.setup {
 lc.glsl_analyzer.setup {
     capabilities = capabilities,
 }
+lc.zls.setup {
+    capabilities = capabilities,
+}
 
 require('glslView').setup {
   viewer_path = 'glslViewer',
   args = { '-l' },
 }
+
+require('lsp_signature').setup({
+
+})
 
 local bindings = require('lspbindings')
 
