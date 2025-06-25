@@ -33,6 +33,7 @@
   "onedark.nvim": { "branch": "master", "commit": "11de4da47f3e69cb70c3ae9816bd8af166cbe121" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
   "popup.nvim": { "branch": "master", "commit": "b7404d35d5d3548a82149238289fa71f7f6de4ac" },
+  "rustaceanvim": { "branch": "master", "commit": "b554761a920d807c3a7e8388d0dd34205ae4fd0d" },
   "telescope.nvim": { "branch": "master", "commit": "b4da76be54691e854d3e0e02c36b0245f945c2c7" },
   "tree-sitter-typescript": { "branch": "master", "commit": "75b3874edb2dc714fb1fd77a32013d0f8699989f" },
   "vim-floaterm": { "branch": "master", "commit": "b02d1f4a87ad6f5b300d225e5ac62bde9d86086b" },

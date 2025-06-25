@@ -31,7 +31,7 @@ return {
         require('mason-lspconfig').setup({
             ensure_installed = {
                 "lua_ls",
-                "rust_analyzer",
+                -- "rust_analyzer",
                 "ts_ls",
                 "clangd",
                 "cssls",
@@ -40,34 +40,34 @@ return {
             },
             handlers = {
                 function(server_name)
-                    require("lspconfig")[server_name].setup({
-                        capabilities = cap
-                    })
+                        require("lspconfig")[server_name].setup({
+                            capabilities = cap
+                        })
                 end,
             }
         })
-        require("lspconfig").rust_analyzer.setup {
-            flags = {
-                debounce_text_changes = 150,
-            },
-            settings = {
-                ["rust-analyzer"] = {
-                    cargo = {
-                        allFeatures = true,
-                    },
-                    completion = {
-                        postfix = {
-                            enable = false,
-                        },
-                    },
-                    diagnostics = {
-                        enable = true,
-                        disabled = { "unresolved-proc-macro" }
-                    }
-                },
-            },
-            capabilities = cap,
-        }
+        -- require("lspconfig").rust_analyzer.setup {
+        --     flags = {
+        --         debounce_text_changes = 150,
+        --     },
+        --     settings = {
+        --         ["rust-analyzer"] = {
+        --             cargo = {
+        --                 allFeatures = true,
+        --             },
+        --             completion = {
+        --                 postfix = {
+        --                     enable = false,
+        --                 },
+        --             },
+        --             diagnostics = {
+        --                 enable = true,
+        --                 disabled = { "unresolved-proc-macro" }
+        --             }
+        --         },
+        --     },
+        --     capabilities = cap,
+        -- }
 
 
         require("lspconfig").ts_ls.setup {

@@ -17,7 +17,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
             { "<leader>lf", vim.lsp.buf.format,           desc = "Format file" },
             { "[d",         vim.diagnostic.goto_next,     desc = "Go to next diagnostic" },
             { "]d",         vim.diagnostic.goto_prev,     desc = "Go to previous diagnostic" },
-
         }
 
         wk.add(mappings, opts)
