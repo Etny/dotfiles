@@ -31,7 +31,7 @@ return {
         require('mason-lspconfig').setup({
             ensure_installed = {
                 "lua_ls",
-                -- "rust_analyzer",
+                -- "rust_analyzer", use 'rustup component add rust-analyzer' instead!
                 "ts_ls",
                 "clangd",
                 "cssls",
@@ -40,9 +40,10 @@ return {
             },
             handlers = {
                 function(server_name)
-                        require("lspconfig")[server_name].setup({
-                            capabilities = cap
-                        })
+                    require("lspconfig")[server_name].setup({
+                        capabilities = cap,
+                        on_attach = require('virtualtypes').on_attach
+                    })
                 end,
             }
         })
@@ -93,18 +94,18 @@ return {
 
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
-        require("luasnip.loaders.from_vscode").lazy_load()
+        -- require("luasnip.loaders.from_vscode").lazy_load()
 
         cmp.setup({
             sources = {
-                { name = 'path' },                    -- file paths
-                { name = 'nvim_lsp' },                -- from language server
-                { name = 'nvim_lsp_signature_help' }, -- display function signatures with current parameter emphasized
-                { name = 'nvim_lua' },                -- complete neovim's Lua runtime API such vim.lsp.*
+                { name = 'path' },                                  -- file paths
+                { name = 'nvim_lsp', },                             -- from language server
+                { name = 'nvim_lsp_signature_help', priority = 2 }, -- display function signatures with current parameter emphasized
+                { name = 'nvim_lua' },                              -- complete neovim's Lua runtime API such vim.lsp.*
                 -- { name = 'vsnip', keyword_length = 2 },         -- nvim-cmp source for vim-vsnip
-                { name = 'luasnip',                keyword_length = 2 },
-                { name = 'buffer',                 keyword_length = 3 }, -- source current buffer
-                { name = 'calc' },                                       -- source for math calculation
+                { name = 'luasnip',                 keyword_length = 2, },
+                { name = 'buffer',                  keyword_length = 3, },  -- source current buffer
+                { name = 'calc' },                                          -- source for math calculation
             },
             mapping = cmp.mapping.preset.insert({
                 ['<A-k>'] = cmp.mapping.select_prev_item(cmp_select),
@@ -130,7 +131,19 @@ return {
                 expand = function(args)
                     require('luasnip').lsp_expand(args.body)
                 end
-            }
+            },
+            sorting = {
+                -- TODO: Would be cool to add stuff like "See variable names before method names" in rust, or something like that.
+                comparators = {
+                    cmp.config.compare.kind,
+                    cmp.config.compare.offset,
+                    cmp.config.compare.exact,
+                    cmp.config.compare.score,
+                    cmp.config.compare.sort_text,
+                    cmp.config.compare.length,
+                    cmp.config.compare.order,
+                },
+            },
         })
     end
 }

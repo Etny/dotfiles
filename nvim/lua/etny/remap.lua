@@ -21,7 +21,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         wk.add(mappings, opts)
 
-        require("virtualtypes").on_attach()
+        -- require("virtualtypes").on_attach()
 
         -- https://www.mitchellhanberg.com/modern-format-on-save-in-neovim/
         vim.api.nvim_create_autocmd("FileWritePre", {
@@ -45,8 +45,15 @@ vim.api.nvim_create_autocmd("VimEnter", {
 })
 
 local non_lsp_mappings = {
-    { "<leader>e", require('nvim-tree.api').tree.toggle,      desc = "Open file explorer" },
-    { "<leader>p", "\"_dP",                                   desc = "Paste without overwriting" },
+    { "<leader>e", require('nvim-tree.api').tree.toggle, desc = "Open file explorer" },
+    { "<leader>p", "\"_dP",                              desc = "Paste without overwriting" },
+    {
+        "<leader>h",
+        function()
+            require('hop').hint_patterns()
+        end,
+        desc = "Hop"
+    },
     { "<leader>/", "<Plug>(comment_toggle_linewise_current)", desc = "Toggle comment" },
     -- { "<A-j>",     ":m '>+1<CR>",                             desc = "Move line down" },
     -- { "<A-k>",     ":m '<-2<CR>",                             desc = "Move line up" },
