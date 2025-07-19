@@ -31,7 +31,7 @@ return {
         require('mason-lspconfig').setup({
             ensure_installed = {
                 "lua_ls",
-                -- "rust_analyzer", use 'rustup component add rust-analyzer' instead!
+                -- "rust_analyzer", -- use 'rustup component add rust-analyzer' instead!
                 -- "ts_ls",
                 "clangd",
                 "cssls",
@@ -79,6 +79,7 @@ return {
                 end
             }
         })
+
 
         local cmp = require("cmp")
         local luasnip = require("luasnip")

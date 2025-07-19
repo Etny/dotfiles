@@ -4,11 +4,11 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = {
-    "documentation",
-    "detail",
-    "additionalTextEdits",
-  },
+    properties = {
+        "documentation",
+        "detail",
+        "additionalTextEdits",
+    },
 }
 
 lc.clangd.setup {
@@ -31,31 +31,31 @@ lc.rust_analyzer.setup {
             },
             diagnostics = {
                 enable = true,
-                disabled = {"unresolved-proc-macro"}
+                disabled = { "unresolved-proc-macro" }
             }
         },
     },
-    capabilities = capabilities,
+    capabilitie = capabilities,
 }
 lc.ts_ls.setup {
     init_options = {
-      plugins = {
-        {
-          name = "@vue/typescript-plugin",
-          location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
-          languages = {"javascript", "typescript", "vue"},
+        plugins = {
+            {
+                name = "@vue/typescript-plugin",
+                location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
+                languages = { "javascript", "typescript", "vue" },
+            },
         },
-      },
     },
     filetypes = {
-      "javascript",
-      "typescript",
-      "vue",
+        "javascript",
+        "typescript",
+        "vue",
     },
     capabilities = capabilities
 }
 
-local servers = {'cssls', 'glsl_analyzer', 'zls', 'texlab', 'html', 'volar', 'hls'}
+local servers = { 'cssls', 'glsl_analyzer', 'zls', 'texlab', 'html', 'volar', 'hls' }
 for _, server in ipairs(servers) do
     lc[server].setup {
         capabilities = capabilities
@@ -68,8 +68,8 @@ lc.asm_lsp.setup {
 }
 
 require('glslView').setup {
-  viewer_path = 'glslViewer',
-  args = { '-l' },
+    viewer_path = 'glslViewer',
+    args = { '-l' },
 }
 
 require('lsp_signature').setup({
