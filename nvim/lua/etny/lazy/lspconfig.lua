@@ -32,62 +32,53 @@ return {
             ensure_installed = {
                 "lua_ls",
                 -- "rust_analyzer", use 'rustup component add rust-analyzer' instead!
-                "ts_ls",
+                -- "ts_ls",
                 "clangd",
                 "cssls",
                 "html",
+                "denols",
                 "vue_ls",
             },
             handlers = {
                 function(server_name)
                     require("lspconfig")[server_name].setup({
                         capabilities = cap,
-                        on_attach = require('virtualtypes').on_attach
                     })
                 end,
+
+                ts_ls = function()
+                    require("lspconfig").ts_ls.setup {
+                        init_options = {
+                            plugins = {
+                                {
+                                    name = "@vue/typescript-plugin",
+                                    location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
+                                    languages = { "javascript", "typescript", "vue" },
+                                },
+                            },
+                        },
+                        filetypes = {
+                            "javascript",
+                            "typescript",
+                            "vue",
+                        },
+                        root_dir = function(fname)
+                            -- This will use tsserver unless a deno config is present
+                            local util = require('lspconfig').util
+                            return not util.root_pattern('deno.json', 'deno.jsonc')(fname)
+                                and util.root_pattern('tsconfig.json', 'package.json', 'jsconfig.json', '.git')(fname)
+                        end, capabilities = cap,
+                        single_file_support = false,
+                    }
+                end,
+
+                denols = function()
+                    require('lspconfig').denols.setup({
+                        root_dir = require("lspconfig").util.root_pattern('deno.json')
+                    })
+                end
             }
         })
-        -- require("lspconfig").rust_analyzer.setup {
-        --     flags = {
-        --         debounce_text_changes = 150,
-        --     },
-        --     settings = {
-        --         ["rust-analyzer"] = {
-        --             cargo = {
-        --                 allFeatures = true,
-        --             },
-        --             completion = {
-        --                 postfix = {
-        --                     enable = false,
-        --                 },
-        --             },
-        --             diagnostics = {
-        --                 enable = true,
-        --                 disabled = { "unresolved-proc-macro" }
-        --             }
-        --         },
-        --     },
-        --     capabilities = cap,
-        -- }
-
-
-        require("lspconfig").ts_ls.setup {
-            init_options = {
-                plugins = {
-                    {
-                        name = "@vue/typescript-plugin",
-                        location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
-                        languages = { "javascript", "typescript", "vue" },
-                    },
-                },
-            },
-            filetypes = {
-                "javascript",
-                "typescript",
-                "vue",
-            },
-            capabilities = cap
-        }
 
         local cmp = require("cmp")
         local luasnip = require("luasnip")
@@ -104,8 +95,8 @@ return {
                 { name = 'nvim_lua' },                              -- complete neovim's Lua runtime API such vim.lsp.*
                 -- { name = 'vsnip', keyword_length = 2 },         -- nvim-cmp source for vim-vsnip
                 { name = 'luasnip',                 keyword_length = 2, },
-                { name = 'buffer',                  keyword_length = 3, },  -- source current buffer
-                { name = 'calc' },                                          -- source for math calculation
+                { name = 'buffer',                  keyword_length = 3, }, -- source current buffer
+                { name = 'calc' },                                         -- source for math calculation
             },
             mapping = cmp.mapping.preset.insert({
                 ['<A-k>'] = cmp.mapping.select_prev_item(cmp_select),

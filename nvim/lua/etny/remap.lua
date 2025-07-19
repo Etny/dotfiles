@@ -24,7 +24,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         -- require("virtualtypes").on_attach()
 
         -- https://www.mitchellhanberg.com/modern-format-on-save-in-neovim/
-        vim.api.nvim_create_autocmd("FileWritePre", {
+        vim.api.nvim_create_autocmd("BufWritePre", {
             buffer = event.buf,
             callback = function()
                 vim.lsp.buf.format({ async = false, id = event.data.client_id })
@@ -33,16 +33,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 })
 
-vim.api.nvim_create_autocmd("VimEnter", {
-    callback = function(data)
-        if data.file == "" then
-            require("nvim-tree.api").tree.open()
-        elseif vim.fn.isdirectory(data.file) == 1 then
-            vim.cmd.cd(data.file)
-            require("nvim-tree.api").tree.open()
-        end
-    end
-})
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--     callback = function(data)
+--         if data.file == "" then
+--             require("nvim-tree.api").tree.open()
+--         elseif vim.fn.isdirectory(data.file) == 1 then
+--             vim.cmd.cd(data.file)
+--             require("nvim-tree.api").tree.open()
+--         end
+--     end
+-- })
 
 local non_lsp_mappings = {
     { "<leader>e", require('nvim-tree.api').tree.toggle, desc = "Open file explorer" },

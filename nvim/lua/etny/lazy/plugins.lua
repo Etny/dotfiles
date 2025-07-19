@@ -29,14 +29,14 @@ return {
             })
         end
     },
-    {
-        'pocco81/auto-save.nvim',
-        config = function()
-            require("auto-save").setup({
-                trigger_events = { "InsertLeave" }
-            })
-        end
-    },
+    -- {
+    --     'pocco81/auto-save.nvim',
+    --     config = function()
+    --         require("auto-save").setup({
+    --             trigger_events = { "InsertLeave" }
+    --         })
+    --     end
+    -- },
     {
         'smoka7/hop.nvim',
         version = "*",
