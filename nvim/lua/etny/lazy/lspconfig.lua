@@ -14,8 +14,9 @@ return {
         "tree-sitter/tree-sitter-typescript"
     },
     config = function()
-        local cmp_lsp = require("cmp_nvim_lsp")
-        local cap = vim.tbl_deep_extend(
+        local cmp_lsp   = require("cmp_nvim_lsp")
+        local lspconfig = require("lspconfig")
+        local cap       = vim.tbl_deep_extend(
             "force",
             {},
             vim.lsp.protocol.make_client_capabilities(),
@@ -26,59 +27,71 @@ return {
         require("mason").setup()
         require("lsp_signature").setup({})
         -- require("tree-sitter/tree-sitter-typescript").tsx.setup({})
-        -- require("virtualtypes").on_attach()
+        require("virtualtypes").on_attach()
 
         require('mason-lspconfig').setup({
             ensure_installed = {
                 "lua_ls",
                 -- "rust_analyzer", -- use 'rustup component add rust-analyzer' instead!
-                -- "ts_ls",
+                "ts_ls",
                 "clangd",
                 "cssls",
                 "html",
                 "denols",
                 "vue_ls",
+                -- "wgsl_analyzer",
             },
-            handlers = {
-                function(server_name)
-                    require("lspconfig")[server_name].setup({
-                        capabilities = cap,
-                    })
-                end,
-
-                ts_ls = function()
-                    require("lspconfig").ts_ls.setup {
-                        init_options = {
-                            plugins = {
-                                {
-                                    name = "@vue/typescript-plugin",
-                                    location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
-                                    languages = { "javascript", "typescript", "vue" },
-                                },
-                            },
-                        },
-                        filetypes = {
-                            "javascript",
-                            "typescript",
-                            "vue",
-                        },
-                        root_dir = function(fname)
-                            -- This will use tsserver unless a deno config is present
-                            local util = require('lspconfig').util
-                            return not util.root_pattern('deno.json', 'deno.jsonc')(fname)
-                                and util.root_pattern('tsconfig.json', 'package.json', 'jsconfig.json', '.git')(fname)
-                        end, capabilities = cap,
-                        single_file_support = false,
-                    }
-                end,
-
-                denols = function()
-                    require('lspconfig').denols.setup({
-                        root_dir = require("lspconfig").util.root_pattern('deno.json')
-                    })
-                end
-            }
         })
+
+        -- Basic Bitches
+        lspconfig.clangd.setup({ capabilities = cap })
+        lspconfig.cssls.setup({ capabilities = cap })
+        -- lspconfig.vue_ls.setup({ capabilities = cap })
+        lspconfig.html.setup({ capabilities = cap })
+        lspconfig.lua_ls.setup({ capabilities = cap })
+
+        -- lspconfig.wgsl_analyzer.setup({
+        --     capabilities = cap,
+        --     settings = {
+        --         ["wgsl-analyzer"] = {
+        --             customImports = {
+        --                 ["bevy_render::view"] =
+        --                 "https://raw.githubusercontent.com/bevyengine/bevy/refs/tags/v0.15.2/crates/bevy_render/src/view/view.wgsl",
+        --             },
+        --         }
+        --
+        --     }
+        --
+        -- })
+
+
+        lspconfig.denols.setup({
+            root_dir = require("lspconfig").util.root_pattern('deno.json')
+        })
+
+        lspconfig.ts_ls.setup {
+            init_options = {
+                plugins = {
+                    {
+                        name = "@vue/typescript-plugin",
+                        location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
+                        languages = { "javascript", "typescript", "vue" },
+                    },
+                },
+            },
+            filetypes = {
+                "javascript",
+                "typescript",
+                "vue",
+            },
+            root_dir = function(fname)
+                -- This will use tsserver unless a deno config is present
+                local util = require('lspconfig').util
+                return not util.root_pattern('deno.json', 'deno.jsonc')(fname)
+                    and util.root_pattern('tsconfig.json', 'package.json', 'jsconfig.json', '.git')(fname)
+            end, capabilities = cap,
+            single_file_support = false,
+        }
 
 
         local cmp = require("cmp")

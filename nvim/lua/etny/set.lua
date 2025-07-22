@@ -21,6 +21,7 @@ vim.opt.termguicolors = true
 
 vim.notify = require("notify")
 
+
 vim.diagnostic.config({
     virtual_text = true,
     signs = true,
@@ -34,3 +35,9 @@ vim.diagnostic.config({
         prefix = '',
     },
 })
+
+vim.cmd([[
+set signcolumn=yes
+set updatetime=300
+autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+]])

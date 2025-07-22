@@ -11,11 +11,11 @@ return {
                         allFeatures = true
                     },
                     -- Add clippy lints for Rust if using rust-analyzer
-                    checkOnSave = diagnostics == "rust-analyzer",
+                    -- checkOnSave = diagnostics == "rust-analyzer",
                     -- Enable diagnostics if using rust-analyzer
                     diagnostics = {
-                        enable = diagnostics == "rust-analyzer",
-                        disabled = {"inactive-code"}
+                        enable = true,
+                        disabled = { "inactive-code" }
                     },
                     completion = {
                         postfix = {
