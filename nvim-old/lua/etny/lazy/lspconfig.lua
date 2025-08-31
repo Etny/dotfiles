@@ -25,9 +25,7 @@ return {
 
         require("fidget").setup({})
         require("mason").setup()
-        require("lsp_signature").setup({})
         -- require("tree-sitter/tree-sitter-typescript").tsx.setup({})
-        require("virtualtypes").on_attach()
 
         require('mason-lspconfig').setup({
             ensure_installed = {
@@ -39,6 +37,7 @@ return {
                 "html",
                 "denols",
                 "vue_ls",
+                "pylsp",
                 -- "wgsl_analyzer",
             },
         })
@@ -49,6 +48,7 @@ return {
         -- lspconfig.vue_ls.setup({ capabilities = cap })
         lspconfig.html.setup({ capabilities = cap })
         lspconfig.lua_ls.setup({ capabilities = cap })
+        lspconfig.pylsp.setup({ capabilities = cap })
 
         -- lspconfig.wgsl_analyzer.setup({
         --     capabilities = cap,
@@ -103,14 +103,14 @@ return {
 
         cmp.setup({
             sources = {
-                { name = 'path' },                                  -- file paths
-                { name = 'nvim_lsp', },                             -- from language server
-                { name = 'nvim_lsp_signature_help', priority = 2 }, -- display function signatures with current parameter emphasized
-                { name = 'nvim_lua' },                              -- complete neovim's Lua runtime API such vim.lsp.*
+                { name = 'path' },                    -- file paths
+                { name = 'nvim_lsp', },               -- from language server
+                { name = 'nvim_lsp_signature_help' }, -- display function signatures with current parameter emphasized
+                { name = 'nvim_lua' },                -- complete neovim's Lua runtime API such vim.lsp.*
                 -- { name = 'vsnip', keyword_length = 2 },         -- nvim-cmp source for vim-vsnip
-                { name = 'luasnip',                 keyword_length = 2, },
-                { name = 'buffer',                  keyword_length = 3, }, -- source current buffer
-                { name = 'calc' },                                         -- source for math calculation
+                { name = 'luasnip',                keyword_length = 2, },
+                { name = 'buffer',                 keyword_length = 3, }, -- source current buffer
+                { name = 'calc' },                                        -- source for math calculation
             },
             mapping = cmp.mapping.preset.insert({
                 ['<A-k>'] = cmp.mapping.select_prev_item(cmp_select),

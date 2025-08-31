@@ -21,7 +21,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         wk.add(mappings, opts)
 
-        -- require("virtualtypes").on_attach()
+        require("virtualtypes").on_attach()
 
         -- https://www.mitchellhanberg.com/modern-format-on-save-in-neovim/
         vim.api.nvim_create_autocmd("BufWritePre", {
