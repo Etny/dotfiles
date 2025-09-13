@@ -2,7 +2,7 @@ local map = vim.keymap.set
 require("opts")
 
 vim.pack.add({
-    { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "master" },
     "https://github.com/nvim-treesitter/nvim-treesitter-context",
     "https://github.com/ibhagwan/fzf-lua",
     "https://github.com/echasnovski/mini.icons",
@@ -12,11 +12,16 @@ vim.pack.add({
     "https://github.com/christoomey/vim-tmux-navigator",
     -- LSP & completion
     { src = "https://github.com/saghen/blink.cmp",                version = vim.version.range("1.*") },
+    { src = "https://github.com/L3MON4D3/LuaSnip",                version = "V2.*" },
+    "https://github.com/vim-pandoc/vim-pandoc",
+    "https://github.com/vim-pandoc/vim-pandoc-syntax",
     "https://github.com/rafamadriz/friendly-snippets",
     "https://github.com/mason-org/mason.nvim",
+    "https://github.com/mason-org/mason-lspconfig.nvim",
     "https://github.com/neovim/nvim-lspconfig",
     "https://github.com/j-hui/fidget.nvim",
     "https://github.com/windwp/nvim-autopairs",
+    "https://github.com/lervag/vimtex",
     -- Editor
     "https://github.com/numToStr/Comment.nvim",
     "https://github.com/folke/flash.nvim",
@@ -25,12 +30,10 @@ vim.pack.add({
 
 })
 
-local lsp = require("lsp")
-
 require("mason").setup()
-lsp.setup_lsp()
-lsp.setup_treesitter()
-lsp.setup_fzf()
+require("mason-lspconfig").setup()
+require("lsp")
+
 
 
 require("treesitter-context").setup({
@@ -100,3 +103,21 @@ map("n", "<leader>h", function() harpoon:list():select(1) end)
 map("n", "<leader>j", function() harpoon:list():select(2) end)
 map("n", "<leader>k", function() harpoon:list():select(3) end)
 map("n", "<leader>l", function() harpoon:list():select(4) end)
+
+-- Pandoc compile and export
+map("n", "<leader><C-P>", function()
+    local path = vim.fn.fnameescape(vim.fn.expand("%:p:h"))
+    local file = vim.fn.fnameescape(vim.fn.expand("%:t:p"))
+    local pdf_name = vim.fn.fnameescape(vim.fn.expand("%:t:r")) .. ".pdf"
+    vim.cmd("silent !mkdir -p " .. path .. "/pdfs")
+    vim.cmd("!pandoc -o " .. path .. "/pdfs/" .. pdf_name .. " " .. file)
+    print("Created " .. pdf_name)
+end)
+
+map("n", "<leader><A-P>", function()
+    local path = vim.fn.fnameescape(vim.fn.expand("%:p:h"))
+    local pdf_name = vim.fn.fnameescape(vim.fn.expand("%:t:r")) .. ".pdf"
+    local pdf_path = path .. "/pdfs/" .. pdf_name
+    vim.cmd("!cp " .. pdf_path .. " ~/paperless/")
+    print("Copied " .. pdf_name)
+end)

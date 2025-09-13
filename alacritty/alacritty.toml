@@ -16,7 +16,10 @@ dynamic_title = true
 startup_mode = "Maximized"
 
 [keyboard]
-bindings = [ { key = "Q", mods = "Control | Shift", action = "Quit" } ]
+bindings = [ 
+    { key = "Q", mods = "Control | Shift", action = "Quit" } 
+]
+
 
 # # These two keyboard bindings are to make Shift/Control + Enter work in Nvim
 # [[keyboard.bindings]]

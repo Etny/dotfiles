@@ -13,9 +13,10 @@ o.incsearch = true
 o.number = true
 o.relativenumber = true
 
-o.cmdheight = 0
+-- o.cmdheight = 0
+-- o.messagesopt = "wait:10,history:500"
 o.listchars = "tab:> ,nbsp:+"
-o.clipboard = "unnamedplus" -- use system clipboard as default
+-- o.clipboard= "unnamed,unnamedplus"
 o.signcolumn = "no"
 o.termguicolors = true
 o.backspace = "indent,eol,start"

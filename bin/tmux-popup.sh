@@ -3,12 +3,19 @@
 set session "_popup_$(tmux display -p '#S')"
 
 if not tmux has -t $session 2> /dev/null
-    set parrent_session "$(tmux display -p '#{session_id}')"
-    set session_id "$(tmux new-session -c '#{pane_current_path}' -dP -s "$session" -F '#{session_^id}' -e TMUX_PARENT_SESSION="$parrent_session")"
-    tmux set-option -s -t $session_id key-table popup \; \
-        set-option -s -t $session_id status off \; \
-        set-option -s -t $session_id prefix None \; \
-        attach -t "$session"
+    # set parrent_session "$(tmux display -p '#{session_id}')"
+    # set session_id "$(tmux new-session -c '#{pane_current_path}' -dP -s "$session" -F '#{session_^id}' -e TMUX_PARENT_SESSION="$parrent_session")"
+    # tmux set-option -s -t $session_id key-table popup \; \
+    #     set-option -s -t $session_id status off \; \
+    #     set-option -s -t $session_id prefix None \; \
+    #     attach -t "$session"
+    #
+    set -l parent_session "$(tmux display -p '#{session_id}')"
+    set -l session_id "$(tmux new-session -dP -s $session -F '#{session_id}' -e TMUX_PARENT_SESSION=$parent_session)"
+    tmux set-option -s -t $session_id key-table popup
+    tmux set-option -s -t $session_id status off
+    tmux set-option -s -t $session_id prefix None
+    set session $session_id
 end
 
-exec tmux attach -t $session > /dev/null
+tmux attach -t $session > /dev/null
