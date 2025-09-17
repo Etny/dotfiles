@@ -33,6 +33,7 @@ local setup = function()
         signature = { enabled = true }
     })
 
+
     -- vim.lsp.config("ltex", {
     --     settings = {
     --         ltex = {
@@ -40,6 +41,14 @@ local setup = function()
     --         }
     --     }
     -- })
+    --
+
+    vim.filetype.add({
+        extension = {
+            spade = 'spade'
+        }
+    })
+
 
     vim.lsp.enable({
         "lua_ls",
@@ -54,14 +63,14 @@ local setup = function()
     })
 
 
+
     autocmd("LspAttach", {
         group = augroup,
         callback = function(ev)
-            local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
             local bufopts = { noremap = true, silent = true, buffer = ev.buf }
 
             map("n", "grd", vim.lsp.buf.definition, bufopts)
-            map("n", "<leader>a", vim.lsp.buf.code_action, bufopts)
+            map("n", "<leader>A", vim.lsp.buf.code_action, bufopts)
 
 
             -- Using blink.cpm instead
@@ -76,7 +85,11 @@ local setup = function()
                 group = augroup,
                 buffer = ev.buffer,
                 callback = function()
-                    vim.lsp.buf.format({ async = false, id = ev.data.client_id })
+                    local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
+                    local methods = vim.lsp.protocol.Methods
+                    if client:supports_method(methods.textDocument_formatting) then
+                        vim.lsp.buf.format({ async = false, id = ev.data.client_id })
+                    end
                 end
             })
         end
@@ -106,6 +119,8 @@ local setup_ts = function()
         "markdown_inline",
         "rust",
     }
+
+
 
     -- local ts = require("nvim-treesitter")
     require("nvim-treesitter.configs").setup({
