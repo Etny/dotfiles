@@ -1,0 +1,140 @@
+{
+  "plugins": {
+    "Comment.nvim": {
+      "rev": "e30b7f2008e52442154b66f7c519bfd2f1e32acb",
+      "src": "https://github.com/numToStr/Comment.nvim"
+    },
+    "LuaSnip": {
+      "rev": "458560534a73f7f8d7a11a146c801db00b081df0",
+      "src": "https://github.com/L3MON4D3/LuaSnip",
+      "version": "'v2.4.0'"
+    },
+    "blink.cmp": {
+      "rev": "b19413d214068f316c78978b08264ed1c41830ec",
+      "src": "https://github.com/saghen/blink.cmp",
+      "version": "1.0.0 - 2.0.0"
+    },
+    "evergarden": {
+      "rev": "ed86852e01f03853326c68961ff10bcaf8ff5f9c",
+      "src": "https://github.com/everviolet/nvim"
+    },
+    "fidget.nvim": {
+      "rev": "e32b672d8fd343f9d6a76944fedb8c61d7d8111a",
+      "src": "https://github.com/j-hui/fidget.nvim"
+    },
+    "flash.nvim": {
+      "rev": "fcea7ff883235d9024dc41e638f164a450c14ca2",
+      "src": "https://github.com/folke/flash.nvim"
+    },
+    "friendly-snippets": {
+      "rev": "572f5660cf05f8cd8834e096d7b4c921ba18e175",
+      "src": "https://github.com/rafamadriz/friendly-snippets"
+    },
+    "fzf-lua": {
+      "rev": "de0fd4a21ee29cf6532d0c3bcae08a0b25d99b6a",
+      "src": "https://github.com/ibhagwan/fzf-lua"
+    },
+    "harpoon": {
+      "rev": "87b1a3506211538f460786c23f98ec63ad9af4e5",
+      "src": "https://github.com/ThePrimeagen/harpoon",
+      "version": "'harpoon2'"
+    },
+    "ltex-ls.nvim": {
+      "rev": "968eac261279d88d7f1ed556aa2dbc535a7489fe",
+      "src": "https://github.com/vigoux/ltex-ls.nvim"
+    },
+    "luasnip-latex-snippets.nvim": {
+      "rev": "57e4330",
+      "src": "https://github.com/iurimateus/luasnip-latex-snippets.nvim"
+    },
+    "mason-lspconfig.nvim": {
+      "rev": "c55bd8a8fb191e24176c206a7af1dd51ce7276a5",
+      "src": "https://github.com/mason-org/mason-lspconfig.nvim"
+    },
+    "mason.nvim": {
+      "rev": "57e5a8addb8c71fb063ee4acda466c7cf6ad2800",
+      "src": "https://github.com/mason-org/mason.nvim"
+    },
+    "mini.icons": {
+      "rev": "ff2e4f1d29f659cc2bad0f9256f2f6195c6b2428",
+      "src": "https://github.com/echasnovski/mini.icons"
+    },
+    "nvim-autopairs": {
+      "rev": "d9e44e54384e5b0f3536339c65484f2e41b528e3",
+      "src": "https://github.com/windwp/nvim-autopairs"
+    },
+    "nvim-lspconfig": {
+      "rev": "a2bd1cf7b0446a7414aaf373cea5e4ca804c9c69",
+      "src": "https://github.com/neovim/nvim-lspconfig"
+    },
+    "nvim-treesitter": {
+      "rev": "42fc28ba918343ebfd5565147a42a26580579482",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter",
+      "version": "'master'"
+    },
+    "nvim-treesitter-context": {
+      "rev": "64dd4cf3f6fd0ab17622c5ce15c91fc539c3f24a",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
+    },
+    "nvim-web-devicons": {
+      "rev": "8dcb311b0c92d460fac00eac706abd43d94d68af",
+      "src": "https://github.com/nvim-tree/nvim-web-devicons"
+    },
+    "oil.nvim": {
+      "rev": "cbcb3f997f6f261c577b943ec94e4ef55108dd95",
+      "src": "https://github.com/stevearc/oil.nvim"
+    },
+    "omnisharp-vim": {
+      "rev": "1e1d65e05ad2bd466851246654d28c91864ab2e7",
+      "src": "https://github.com/OmniSharp/omnisharp-vim"
+    },
+    "pandoc.nvim": {
+      "rev": "c6b447bf86e0d5d1f87f73105e035e240dae5002",
+      "src": "https://github.com/aspeddro/pandoc.nvim"
+    },
+    "plenary.nvim": {
+      "rev": "b9fd5226c2f76c951fc8ed5923d85e4de065e509",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
+    "rustaceanvim": {
+      "rev": "0e8f01d55888f499a48af0752dae7de92ef12269",
+      "src": "https://github.com/mrcjkb/rustaceanvim"
+    },
+    "spade-vim": {
+      "rev": "1016b4eafabaa75728569b1ba1bfbf8a849a4ec4",
+      "src": "https://gitlab.com/spade-lang/spade-vim"
+    },
+    "spade.nvim": {
+      "rev": "201a696ecf39e0456466287c37abf04d289f7c92",
+      "src": "https://github.com/ethanuppal/spade.nvim"
+    },
+    "staline.nvim": {
+      "rev": "d337bc9b343df3328921ef4c3f8ff604102d0201",
+      "src": "https://github.com/tamton-aquib/staline.nvim"
+    },
+    "vim-pandoc": {
+      "rev": "c31d5c10b29c99cf1a344ae30e2ffa32cf2df743",
+      "src": "https://github.com/vim-pandoc/vim-pandoc"
+    },
+    "vim-pandoc-syntax": {
+      "rev": "87929100f2497da82f19180ffa49e75a88e7c369",
+      "src": "https://github.com/vim-pandoc/vim-pandoc-syntax"
+    },
+    "vim-pandoc-syntax-simple": {
+      "rev": "dcb12f120bd475339cfcc0ceb6e0303b50b09e5f",
+      "src": "https://github.com/rwxrob/vim-pandoc-syntax-simple"
+    },
+    "vim-tmux-navigator": {
+      "rev": "c45243dc1f32ac6bcf6068e5300f3b2b237e576a",
+      "src": "https://github.com/christoomey/vim-tmux-navigator"
+    },
+    "vimtex": {
+      "rev": "6e1229e23c3bbe93487ef62458b1241a2d8ff6af",
+      "src": "https://github.com/lervag/vimtex"
+    },
+    "vimux": {
+      "rev": "614f0bb",
+      "src": "https://github.com/preservim/vimux"
+    }
+  }
+}
