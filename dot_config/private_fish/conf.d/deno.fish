@@ -1,1 +1,0 @@
-source "/home/ynte/.deno/env.fish"
