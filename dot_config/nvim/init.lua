@@ -1,6 +1,4 @@
-local map = vim.keymap.set
-require("opts")
-
+local map = vim.keymap.set require("opts")
 vim.pack.add({
     { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "master" },
     "https://github.com/nvim-treesitter/nvim-treesitter-context",
@@ -70,7 +68,6 @@ require("staline").setup({
         branch_symbol = " "
     }
 })
-vim.o.laststatus = 3
 
 -- Oil file browser
 require("mini.icons").setup()
