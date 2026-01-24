@@ -10,14 +10,18 @@ vim.pack.add({
     "https://github.com/tamton-aquib/staline.nvim",
     "https://github.com/nvim-tree/nvim-web-devicons",
     "https://github.com/christoomey/vim-tmux-navigator",
+    "https://github.com/preservim/vimux",
     -- LSP & completion
     { src = "https://github.com/saghen/blink.cmp",                version = vim.version.range("1.*") },
-    { src = "https://github.com/L3MON4D3/LuaSnip",                version = "V2.*" },
-    "https://github.com/ethanuppal/spade.nvim",
-    "https://gitlab.com/spade-lang/spade-vim",
+    { src = "https://github.com/L3MON4D3/LuaSnip",                version = "v2.4.0" },
+    -- "https://github.com/OmniSharp/omnisharp-vim",
+    -- "https://github.com/ethanuppal/spade.nvim",
+    "https://github.com/mrcjkb/rustaceanvim",
+    -- "https://gitlab.com/spade-lang/spade-vim",
     "https://github.com/vim-pandoc/vim-pandoc",
     "https://github.com/vim-pandoc/vim-pandoc-syntax",
     "https://github.com/rafamadriz/friendly-snippets",
+    "https://github.com/iurimateus/luasnip-latex-snippets.nvim",
     "https://github.com/mason-org/mason.nvim",
     "https://github.com/mason-org/mason-lspconfig.nvim",
     "https://github.com/neovim/nvim-lspconfig",
@@ -75,6 +79,11 @@ require("oil").setup({
 })
 map("n", "-", "<CMD>Oil<CR>")
 
+-- LSP
+map("n", "<leader>K", function() vim.diagnostic.open_float() end)
+map("n", "<leader>a", function() vim.lsp.buf.code_action() end)
+map("n", "<F2>", function() vim.lsp.buf.rename() end)
+
 -- Comment lines
 require("Comment").setup()
 map("n", "<leader>/", "<Plug>(comment_toggle_linewise_current)", { desc = "Toggle comment" })
@@ -92,15 +101,16 @@ map("n", "<A-S-h>", "<CMD>TmuxNavigateLeft<CR>")
 map("n", "<A-S-l>", "<CMD>TmuxNavigateRight<CR>")
 
 -- Flash (code navigation)
-require("flash").setup()
+require("flash").setup({ label = { uppercase = false } })
 map({ "n", "x", "o" }, "s", "<CMD>lua require('flash').jump()<CR>")
 map({ "n", "x", "o" }, "S", "<CMD>lua require('flash').treesitter()<CR>")
 
 -- Harpoon (marks and buffers)
 local harpoon = require("harpoon")
 harpoon:setup()
-map("n", "<leader>a", function() harpoon:list():add() end)
+map("n", "<leader>A", function() harpoon:list():add() end)
 map("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+map("n", "<leader>c", function() harpoon:list():clear() end)
 map("n", "<A-Left>", function() harpoon:list():prev() end)
 map("n", "<A-Right>", function() harpoon:list():next() end)
 map("n", "<leader>h", function() harpoon:list():select(1) end)

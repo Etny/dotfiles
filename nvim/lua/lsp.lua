@@ -4,10 +4,14 @@ local autocmd = vim.api.nvim_create_autocmd
 local map = vim.keymap.set
 
 local setup = function()
+    require("luasnip-latex-snippets").setup()
     local ls = require("luasnip")
-    ls.setup({})
-    ls.filetype_set("pandoc", { "markdown", "tex" })
-    require("luasnip.loaders.from_vscode").lazy_load()
+    ls.setup({ enable_autosnippets = true })
+    -- ls.filetype_set("pandoc", { "markdown", "tex" })
+    require("luasnip.loaders.from_vscode").lazy_load {
+        exclude = { "tex" },
+    }
+    -- require("luasnip.loaders.from_vscode").lazy_load()
     require("luasnip.loaders.from_snipmate").lazy_load()
     require("blink.cmp").setup({
         snippets = { preset = "luasnip" },
@@ -15,49 +19,48 @@ local setup = function()
             preset = 'default',
             ['<A-k>'] = { 'select_prev', 'fallback' },
             ['<A-j>'] = { 'select_next', 'fallback' },
-            ['<CR>'] = { 'select_and_accept', 'fallback' },
+            ['<Tab>'] = { 'select_and_accept', 'fallback' },
 
             ['<A-b>'] = { 'scroll_documentation_up', 'fallback' },
             ['<A-f>'] = { 'scroll_documentation_down', 'fallback' },
             ['<A-g>'] = { 'show_signature', 'hide_signature', 'fallback' },
+
         },
         sources = {
-            default = function(ctx)
-                if vim.bo.filetype == 'pandoc' then
-                    return { 'snippets' }
-                else
-                    return { "lsp", "snippets", "path" }
-                end
-            end
+            per_filetype = {
+                pandoc = { 'snippets' },
+                tex = { 'snippets', 'lsp' }
+            }
+        },
+        completion = {
+            menu = {
+                enabled = true,
+                border = nil,
+                direction_priority = { 's', 'n' },
+            },
+            documentation = {
+                auto_show = true,
+                auto_show_delay_ms = 100,
+            }
+        },
+        fuzzy = {
+            implementation = 'rust',
+            max_typos = function(keyword) return 0 end,
         },
         signature = { enabled = true }
     })
 
 
-    -- vim.lsp.config("ltex", {
-    --     settings = {
-    --         ltex = {
-    --             language = "en-GB"
-    --         }
-    --     }
-    -- })
-    --
 
-    vim.filetype.add({
-        extension = {
-            spade = 'spade'
-        }
-    })
 
 
     vim.lsp.enable({
         "lua_ls",
         "ts_ls",
         "vue_ls",
-        "rust_analyzer",
         "marksman",
         "clangd",
-        "csharp_ls",
+        -- "csharp_ls",
         "vhdl_ls",
         -- "ltex"
     })
@@ -69,8 +72,17 @@ local setup = function()
         callback = function(ev)
             local bufopts = { noremap = true, silent = true, buffer = ev.buf }
 
+
+            local client = vim.lsp.get_client_by_id(ev.data.client_id)
+            -- I FUCKING HATE OMNISHARP!!!
+            -- If we don't do this it will:
+            --      1) Fuck up syntax hightlighting
+            --      2) Spam an error in the log every time
+            --         we scroll, filling disk. WHY???
+            if client.name == "omnisharp" then
+                client.server_capabilities.semanticTokensProvider = nil
+            end
             map("n", "grd", vim.lsp.buf.definition, bufopts)
-            map("n", "<leader>A", vim.lsp.buf.code_action, bufopts)
 
 
             -- Using blink.cpm instead
@@ -85,7 +97,8 @@ local setup = function()
                 group = augroup,
                 buffer = ev.buffer,
                 callback = function()
-                    local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
+                    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+                    if client == nill then return end
                     local methods = vim.lsp.protocol.Methods
                     if client:supports_method(methods.textDocument_formatting) then
                         vim.lsp.buf.format({ async = false, id = ev.data.client_id })
@@ -96,6 +109,17 @@ local setup = function()
     })
 
 
+    vim.g.rustaceanvim = {
+        tools = {
+            executor = require("rustaceanvim.executors").vimux,
+        },
+        server = {
+            on_attach = function(client, bufnr)
+                client.server_capabilities.semanticTokensProvider = nil
+            end
+        }
+
+    }
 
 
     require("fidget").setup()
@@ -103,6 +127,8 @@ local setup = function()
     vim.cmd([[
 let g:vimtex_view_method='zathura'
 let g:vimtex_compiler_method='latexmk'
+filetype plugin indent on
+syntax enable
     ]])
 
 
@@ -125,10 +151,11 @@ local setup_ts = function()
     -- local ts = require("nvim-treesitter")
     require("nvim-treesitter.configs").setup({
         ensure_installed = parsers,
-        ignore_install = { "latex" },
+        -- ignore_install = { "rust" },
         highlight = {
             enable = true,
             disable = { "latex" },
+            additional_languages = { 'c_sharp' },
             additional_vim_regex_hightlighting = { "latex", "markdown" }
         },
         indent = { enable = true }
@@ -165,22 +192,25 @@ end
 
 local setup_fzf = function()
     local fzf = require("fzf-lua")
-    local noprev = { winopts = { preview = { hidden = false } } }
-    local fzf_files = function()
-        fzf.files(noprev)
-    end
 
-    local fzf_symbols = function()
-        fzf.lsp_document_symbols(noprev)
-    end
-
-    local fzf_buffers = function()
-        fzf.buffers(noprev)
-    end
-
-    map("n", "<leader>s", fzf_files, { desc = "fzf files", noremap = true, silent = true })
+    map("n", "<leader>s", fzf.files, { desc = "fzf files", noremap = true, silent = true })
     map("n", "<leader>S", fzf.live_grep, { desc = "fzf grep", noremap = true, silent = true })
-    fzf.setup({ "max-perf" })
+    fzf.setup({
+        winopts = {
+            preview = {
+                hidden = false
+            },
+            on_create = function()
+                map("t", "<A-j>", "<Down>", { buffer = true, silent = true })
+                map("t", "<A-k>", "<Up>", { buffer = true, silent = true })
+            end
+        },
+        keymap = {
+            fzf = {
+                ["alt-j"] = "preview-down",
+            }
+        }
+    })
 end
 
 

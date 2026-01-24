@@ -2,9 +2,9 @@
 TERM = "xterm-256color"
 
 [font]
-size = 16.0
-offset = { y = 1 }
-normal = { family = "Jetbrains Mono NL", style = "medium" }
+size = 14.0
+# offset = { y = 1 }
+normal = { family = "Hack", style = "Regular" }
 
 
 [terminal.shell]
@@ -14,6 +14,7 @@ program = "/bin/fish"
 decorations = "none"
 dynamic_title = true
 startup_mode = "Maximized"
+dynamic_padding = true
 
 [keyboard]
 bindings = [ 
