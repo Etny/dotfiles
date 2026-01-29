@@ -1,4 +1,5 @@
-local map = vim.keymap.set require("opts")
+local map = vim.keymap.set
+require("opts")
 vim.pack.add({
     { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "master" },
     "https://github.com/nvim-treesitter/nvim-treesitter-context",
@@ -31,7 +32,6 @@ vim.pack.add({
     "https://github.com/folke/flash.nvim",
     "https://github.com/nvim-lua/plenary.nvim",
     { src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
-
 })
 
 require("mason").setup()
@@ -80,6 +80,10 @@ map("n", "-", "<CMD>Oil<CR>")
 map("n", "<leader>K", function() vim.diagnostic.open_float() end)
 map("n", "<leader>a", function() vim.lsp.buf.code_action() end)
 map("n", "<F2>", function() vim.lsp.buf.rename() end)
+map("n", "<leader>d", vim.lsp.buf.definition, bufopts)
+map("n", "<leader>r", vim.lsp.buf.references, bufopts)
+map("n", "<leader>t", vim.lsp.buf.type_definition, bufopts)
+map("n", "<leader>T", vim.lsp.buf.type_definition, bufopts)
 
 -- Comment lines
 require("Comment").setup()
@@ -98,7 +102,11 @@ map("n", "<A-S-h>", "<CMD>TmuxNavigateLeft<CR>")
 map("n", "<A-S-l>", "<CMD>TmuxNavigateRight<CR>")
 
 -- Flash (code navigation)
-require("flash").setup({ label = { uppercase = false } })
+require("flash").setup({
+    label = { uppercase = false },
+    highlight = { backdrop = false },
+    modes = { char = { enabled = false } }
+})
 map({ "n", "x", "o" }, "s", "<CMD>lua require('flash').jump()<CR>")
 map({ "n", "x", "o" }, "S", "<CMD>lua require('flash').treesitter()<CR>")
 

@@ -82,7 +82,6 @@ local setup = function()
             if client.name == "omnisharp" then
                 client.server_capabilities.semanticTokensProvider = nil
             end
-            map("n", "grd", vim.lsp.buf.definition, bufopts)
 
 
             -- Using blink.cpm instead
