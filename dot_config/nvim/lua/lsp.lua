@@ -14,7 +14,7 @@ local setup = function()
     -- require("luasnip.loaders.from_vscode").lazy_load()
     require("luasnip.loaders.from_snipmate").lazy_load()
     require("blink.cmp").setup({
-        snippets = { preset = "luasnip" },
+        -- snippets = { preset = "luasnip" },
         keymap = {
             preset = 'default',
             ['<A-k>'] = { 'select_prev', 'fallback' },
