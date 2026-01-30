@@ -120,7 +120,7 @@ map("n", "<A-S-l>", "<CMD>TmuxNavigateRight<CR>")
 -- Flash (code navigation)
 require("flash").setup({
     label = { uppercase = false },
-    highlight = { backdrop = false },
+    -- highlight = { backdrop = false },
     modes = { char = { enabled = false } }
 })
 map({ "n", "x", "o" }, "s", "<CMD>lua require('flash').jump()<CR>")
