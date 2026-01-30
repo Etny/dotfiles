@@ -32,6 +32,7 @@ vim.pack.add({
     "https://github.com/folke/flash.nvim",
     "https://github.com/nvim-lua/plenary.nvim",
     { src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
+    "https://github.com/m4xshen/hardtime.nvim"
 })
 
 require("mason").setup()
@@ -109,6 +110,18 @@ require("flash").setup({
 })
 map({ "n", "x", "o" }, "s", "<CMD>lua require('flash').jump()<CR>")
 map({ "n", "x", "o" }, "S", "<CMD>lua require('flash').treesitter()<CR>")
+
+
+-- Hardtime (better vim habits)
+require("hardstime").setup({
+    disabled_keys = {
+        ["<Up>"] = false,
+        ["<Down>"] = false,
+        ["<Left>"] = false,
+        ["<Right>"] = false,
+    },
+    disable_mouse = false,
+})
 
 -- Harpoon (marks and buffers)
 local harpoon = require("harpoon")
