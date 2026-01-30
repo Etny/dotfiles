@@ -70,6 +70,21 @@ require("staline").setup({
     }
 })
 
+-- Fidget (better notify)
+require("fidget").setup({
+    notification = {
+        override_vim_notify = true,
+        configs = {
+            default = require("fidget.notification").default_config,
+            hardtime = vim.tbl_deep_extend("force", require("fidget.notification").default_config, {
+                name = "Hardtime",
+                icon = "󱅨",
+                icon_on_left = true
+            })
+        }
+    }
+})
+
 -- Oil file browser
 require("mini.icons").setup()
 require("oil").setup({
@@ -121,6 +136,9 @@ require("hardtime").setup({
         ["<Right>"] = false,
     },
     disable_mouse = false,
+    callback = function(msg)
+        require("fidget").notify(msg, vim.log.levels.WARN, { group = "hardtime" })
+    end
 })
 
 -- Harpoon (marks and buffers)
