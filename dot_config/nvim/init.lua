@@ -113,7 +113,7 @@ map({ "n", "x", "o" }, "S", "<CMD>lua require('flash').treesitter()<CR>")
 
 
 -- Hardtime (better vim habits)
-require("hardstime").setup({
+require("hardtime").setup({
     disabled_keys = {
         ["<Up>"] = false,
         ["<Down>"] = false,
