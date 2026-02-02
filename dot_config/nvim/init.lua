@@ -12,7 +12,7 @@ vim.pack.add({
     "https://github.com/preservim/vimux",
     -- LSP & completion
     { src = "https://github.com/saghen/blink.cmp",                version = vim.version.range("1.*") },
-    { src = "https://github.com/L3MON4D3/LuaSnip",                version = "v2.4.0" },
+    -- { src = "https://github.com/L3MON4D3/LuaSnip",                version = "v2.4.0" },
     -- "https://github.com/OmniSharp/omnisharp-vim",
     -- "https://github.com/ethanuppal/spade.nvim",
     "https://github.com/mrcjkb/rustaceanvim",

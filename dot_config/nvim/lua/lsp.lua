@@ -4,15 +4,15 @@ local autocmd = vim.api.nvim_create_autocmd
 local map = vim.keymap.set
 
 local setup = function()
-    require("luasnip-latex-snippets").setup()
-    local ls = require("luasnip")
-    ls.setup({ enable_autosnippets = true })
+    -- require("luasnip-latex-snippets").setup()
+    -- local ls = require("luasnip")
+    -- ls.setup({ enable_autosnippets = true })
     -- ls.filetype_set("pandoc", { "markdown", "tex" })
-    require("luasnip.loaders.from_vscode").lazy_load {
-        exclude = { "tex" },
-    }
+    -- require("luasnip.loaders.from_vscode").lazy_load {
+    --     exclude = { "tex" },
+    -- }
     -- require("luasnip.loaders.from_vscode").lazy_load()
-    require("luasnip.loaders.from_snipmate").lazy_load()
+    -- require("luasnip.loaders.from_snipmate").lazy_load()
     require("blink.cmp").setup({
         -- snippets = { preset = "luasnip" },
         keymap = {

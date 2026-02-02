@@ -5,6 +5,7 @@ set -gx fish_greeting # Disable greeting
 set -gx hydro_symbol_start " "
 set -gx hydro_color_pwd $fish_color_cwd
 set -gx hydro_color_prompt $fish_color_quote
+bind alt-v "nvim ."
 if status is-interactive
     if test -z $TMUX
        tmux new -As0
