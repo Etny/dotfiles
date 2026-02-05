@@ -16,6 +16,7 @@ o.number = true
 o.relativenumber = true
 o.conceallevel = 2
 
+o.spelllang = en, nl
 o.cmdheight = 1
 -- o.messagesopt = "wait:10,history:500"
 o.listchars = "tab:> ,nbsp:+"
@@ -33,6 +34,6 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.diagnostic.config({
     severity_sort = true,
-    -- virtual_text = true,
-    virtual_lines = true
+    virtual_text = true,
+    -- virtual_lines = true
 })
