@@ -27,25 +27,28 @@ local setup = function()
 
         },
         sources = {
+            default = { 'lsp', 'path', 'snippets' },
             per_filetype = {
                 pandoc = { 'snippets' },
                 tex = { 'snippets', 'lsp' }
             }
         },
         completion = {
-            menu = {
-                enabled = true,
-                border = nil,
-                direction_priority = { 's', 'n' },
-            },
+            -- menu = {
+            --     enabled = true,
+            --     border = nil,
+            --     direction_priority = { 's', 'n' },
+            -- },
             documentation = {
-                auto_show = true,
-                auto_show_delay_ms = 100,
+                auto_show = false,
             }
         },
         fuzzy = {
             implementation = 'rust',
-            max_typos = function(keyword) return 0 end,
+            -- max_typos = function(keyword) return 0 end,
+        },
+        appearance = {
+            nerd_font_variant = 'mono',
         },
         signature = { enabled = true }
     })
@@ -53,6 +56,9 @@ local setup = function()
 
 
 
+    vim.lsp.config('*', {
+        capabilities = require('blink.cmp').get_lsp_capabilities()
+    })
 
     vim.lsp.enable({
         "lua_ls",
@@ -61,7 +67,6 @@ local setup = function()
         "marksman",
         "clangd",
         -- "csharp_ls",
-        "vhdl_ls",
         -- "ltex"
     })
 
@@ -83,6 +88,15 @@ local setup = function()
                 client.server_capabilities.semanticTokensProvider = nil
             end
 
+            if client and client:supports_method('textDocument/inlayHint', ev.buf) then
+                vim.keymap.set('n',
+                    '<leader>th',
+                    function()
+                        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = ev.buf })
+                    end,
+                    { buffer = ev.buf }
+                )
+            end
 
             -- Using blink.cpm instead
             -- map("i", "<C-k>", vim.lsp.completion.get, bufopts)
@@ -97,9 +111,7 @@ local setup = function()
                 buffer = ev.buffer,
                 callback = function()
                     local client = vim.lsp.get_client_by_id(ev.data.client_id)
-                    if client == nill then return end
-                    local methods = vim.lsp.protocol.Methods
-                    if client:supports_method(methods.textDocument_formatting) then
+                    if client and client:supports_method('textDocument/formatting', ev.buffer) then
                         vim.lsp.buf.format({ async = false, id = ev.data.client_id })
                     end
                 end
@@ -109,13 +121,16 @@ local setup = function()
 
 
     vim.g.rustaceanvim = {
-        tools = {
-            executor = require("rustaceanvim.executors").vimux,
-        },
         server = {
-            on_attach = function(client, bufnr)
-                client.server_capabilities.semanticTokensProvider = nil
-            end
+            -- on_attach = function(client, bufnr)
+                -- client.server_capabilities.semanticTokensProvider = nil
+            -- end,
+            default_settings = {
+                ['rust-analyzer'] = {
+                    numThreads = 8,
+                    cachePriming = { numThreads = 8 } 
+                }
+            }
         }
 
     }
@@ -131,7 +146,6 @@ syntax enable
 
 
 
-    require("nvim-autopairs").setup()
 end
 
 local setup_ts = function()

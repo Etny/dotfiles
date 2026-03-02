@@ -11,24 +11,25 @@ vim.pack.add({
     "https://github.com/christoomey/vim-tmux-navigator",
     "https://github.com/preservim/vimux",
     -- LSP & completion
-    { src = "https://github.com/saghen/blink.cmp",                version = vim.version.range("1.*") },
+    -- { src = "https://github.com/saghen/blink.cmp",                version = vim.version.range("1.*") },
+    { src = "https://github.com/saghen/blink.cmp" },
     -- { src = "https://github.com/L3MON4D3/LuaSnip",                version = "v2.4.0" },
     -- "https://github.com/OmniSharp/omnisharp-vim",
     -- "https://github.com/ethanuppal/spade.nvim",
     "https://github.com/mrcjkb/rustaceanvim",
     -- "https://gitlab.com/spade-lang/spade-vim",
-    "https://github.com/vim-pandoc/vim-pandoc",
-    "https://github.com/vim-pandoc/vim-pandoc-syntax",
-    "https://github.com/rafamadriz/friendly-snippets",
-    "https://github.com/iurimateus/luasnip-latex-snippets.nvim",
+    -- "https://github.com/vim-pandoc/vim-pandoc",
+    -- "https://github.com/vim-pandoc/vim-pandoc-syntax",
+    -- "https://github.com/rafamadriz/friendly-snippets",
+    -- "https://github.com/iurimateus/luasnip-latex-snippets.nvim",
     "https://github.com/mason-org/mason.nvim",
     "https://github.com/mason-org/mason-lspconfig.nvim",
     "https://github.com/neovim/nvim-lspconfig",
     "https://github.com/j-hui/fidget.nvim",
-    "https://github.com/windwp/nvim-autopairs",
     "https://github.com/lervag/vimtex",
     -- Editor
     "https://github.com/numToStr/Comment.nvim",
+    "https://github.com/windwp/nvim-autopairs",
     "https://github.com/folke/flash.nvim",
     "https://github.com/nvim-lua/plenary.nvim",
     { src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
@@ -40,6 +41,7 @@ require("mason-lspconfig").setup()
 require("lsp")
 
 
+require("nvim-autopairs").setup()
 
 require("treesitter-context").setup({
     max_lines = 3,
@@ -91,6 +93,9 @@ require("oil").setup({
     columns = { "icon", "size" },
 })
 map("n", "-", "<CMD>Oil<CR>")
+
+-- Better paste
+map("x", "<leader>p", [["_dp]])
 
 -- LSP
 map("n", "<leader>K", function() vim.diagnostic.open_float() end)
@@ -151,7 +156,7 @@ local harpoon = require("harpoon")
 harpoon:setup()
 map("n", "<leader>A", function() harpoon:list():add() end)
 map("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-map("n", "<leader>c", function() harpoon:list():clear() end)
+map("n", "<leader>C", function() harpoon:list():clear() end)
 map("n", "<A-Left>", function() harpoon:list():prev() end)
 map("n", "<A-Right>", function() harpoon:list():next() end)
 map("n", "<leader>h", function() harpoon:list():select(1) end)

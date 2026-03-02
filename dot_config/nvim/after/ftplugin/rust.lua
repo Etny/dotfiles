@@ -16,14 +16,14 @@ vim.keymap.set(
     end,
     { silent = true, buffer = bufnr }
 )
-vim.keymap.set(
-    "n",
-    "<leader>K", -- Override Neovim's built-in hover keymap with rustaceanvim's hover actions
-    function()
-        vim.cmd.RustLsp('explainError')
-    end,
-    { silent = true, buffer = bufnr }
-)
+-- vim.keymap.set(
+--     "n",
+--     "<leader>K", -- Override Neovim's built-in hover keymap with rustaceanvim's hover actions
+--     function()
+--         vim.cmd.RustLsp('explainError')
+--     end,
+--     { silent = true, buffer = bufnr }
+-- )
 vim.keymap.set(
     "n", "<F5>",
     function()
