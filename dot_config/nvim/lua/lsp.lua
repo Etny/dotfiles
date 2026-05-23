@@ -129,7 +129,7 @@ filetype plugin indent on
 syntax enable
     ]])
 
-
+    vim.cmd([[filetype indent on]])
 
     require("nvim-autopairs").setup()
 end
@@ -144,21 +144,30 @@ local setup_ts = function()
         "rust",
     }
 
+    require("nvim-treesitter").setup({
+        -- ignore_install = { "rust" },
+        -- highlight = {
+        --     disable = { "latex" },
+        --     additional_languages = { 'c_sharp' },
+        --     additional_vim_regex_hightlighting = { "latex", "markdown" }
+        -- },
+    })
 
+    -- require('nvim-treesitter').install(parsers)
+    autocmd('FileType', {
+        callback = function()
+            -- Enable treesitter highlighting and disable regex syntax
+            pcall(vim.treesitter.start)
+            -- Enable treesitter-based indentation
+            if vim.bo.filetype ~= "cs" then
+                vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            end
+        end,
+    })
+    -- ...
 
     -- local ts = require("nvim-treesitter")
-    require("nvim-treesitter.configs").setup({
-        ensure_installed = parsers,
-        -- ignore_install = { "rust" },
-        highlight = {
-            enable = true,
-            disable = { "latex" },
-            additional_languages = { 'c_sharp' },
-            additional_vim_regex_hightlighting = { "latex", "markdown" }
-        },
-        indent = { enable = true }
-    })
-    -- ts.install(parsers)
+    -- ts.install(parsers)vim.cmd('filetype indent on')
     -- autocmd("PackChanged", {
     --     group = augroup,
     --     callback = function(ev)

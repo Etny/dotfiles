@@ -32,6 +32,22 @@ vim.keymap.set(
     { silent = true, buffer = bufnr }
 )
 
+vim.keymap.set(
+    "n", "<leader>D",
+    function()
+        vim.cmd.RustLsp('openDocs')
+    end,
+    { silent = true, buffer = bufnr }
+)
+
+vim.keymap.set(
+    "n", "<leader>C",
+    function()
+        vim.cmd.RustLsp('openCargo')
+    end,
+    { silent = true, buffer = bufnr }
+)
+
 
 vim.g.VimuxCloseOnExit = 1
 vim.g.VimuxUseNearest = 0

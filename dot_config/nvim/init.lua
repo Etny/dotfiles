@@ -1,7 +1,7 @@
 local map = vim.keymap.set
 require("opts")
 vim.pack.add({
-    { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "master" },
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter", branch = "main" },
     "https://github.com/nvim-treesitter/nvim-treesitter-context",
     "https://github.com/ibhagwan/fzf-lua",
     "https://github.com/echasnovski/mini.icons",
@@ -32,7 +32,11 @@ vim.pack.add({
     "https://github.com/folke/flash.nvim",
     "https://github.com/nvim-lua/plenary.nvim",
     { src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
-    "https://github.com/m4xshen/hardtime.nvim"
+    "https://github.com/m4xshen/hardtime.nvim",
+    "https://github.com/aditya-azad/candle-grey",
+    "https://github.com/slugbyte/lackluster.nvim",
+    "https://github.com/silentium-theme/silentium.nvim",
+    'https://github.com/vyfor/cord.nvim' -- Discord Rich Presence
 })
 
 require("mason").setup()
@@ -89,6 +93,10 @@ require("fidget").setup({
 require("mini.icons").setup()
 require("oil").setup({
     columns = { "icon", "size" },
+    -- use 'g.' instead
+    -- view_options = {
+    --     show_hidden = true
+    -- }
 })
 map("n", "-", "<CMD>Oil<CR>")
 
@@ -158,6 +166,9 @@ map("n", "<leader>h", function() harpoon:list():select(1) end)
 map("n", "<leader>j", function() harpoon:list():select(2) end)
 map("n", "<leader>k", function() harpoon:list():select(3) end)
 map("n", "<leader>l", function() harpoon:list():select(4) end)
+
+-- Discord Rich Presence
+require('cord').setup()
 
 -- Pandoc compile and export
 map("n", "<leader><C-P>", function()
