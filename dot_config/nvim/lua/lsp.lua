@@ -153,6 +153,17 @@ local setup_ts = function()
         -- },
     })
 
+    vim.api.nvim_create_autocmd('User', { pattern = 'TSUpdate',
+callback = function()
+   require("nvim-treesitter.parsers").haskell = {
+        install_info = {
+            revision = "98aedbd2d6947a168ba3ba3755d70b0cb6b78395",
+            url = "https://github.com/tree-sitter-grammars/tree-sitter-haskell",
+        },
+    }
+    end})
+    
+
     -- require('nvim-treesitter').install(parsers)
     autocmd('FileType', {
         callback = function()
